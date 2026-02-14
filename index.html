@@ -6,6 +6,7 @@
     <title>Bella Vista Restaurant - Authentic Italian  Cuisine</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header class="header">
         <div class="container">
@@ -107,7 +108,7 @@
                         </div>
                         <div class="contact-form">
                             <h3>Make a Reservation</h3>
-                            <form >
+                            <form id="reservation-form" >
                                 <div class="form-group">
                                     <label for="name">Full Name:</label>
                                     <input type="text" id="name" name="name" required>
@@ -126,7 +127,7 @@
                                 </div>
                                  <div class="form-group">
                                     <label for="time">Time:</label>
-                                    <select name="time" id="tine" required>
+                                    <select name="time" id="time" required>
                                         <option value="">Select Time</option>
                                         <option value="18:00">6.00 PM</option>
                                         <option value="19:00">7.00 PM</option>
@@ -197,4 +198,37 @@ Experience the taste of Italy with every bite.</p>
             </footer>
     </main>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  emailjs.init("_vcukmTXsEj1iYsyj");
+
+  document.getElementById("reservation-form")
+    .addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const form = this;
+
+      emailjs.sendForm("service_qcwyf2g",
+                       "template_r55rmxk",
+                       form)
+        .then(function() {
+
+          // Send confirmation to customer
+         
+
+          alert("Reservation submitted successfully! Confirmation email sent.");
+          form.reset();
+
+        }, function(error) {
+          alert("Failed to send reservation.");
+          console.log(error);
+        });
+    });
+
+});
+</script>
+
 </html>
